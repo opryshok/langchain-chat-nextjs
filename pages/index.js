@@ -10,7 +10,7 @@ export default function Home() {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi there! How can I help?" }
+    { role: "assistant", content: "Please describe the situation you would like to think about using mental models." }
   ]);
 
   const messageListRef = useRef(null);
@@ -29,7 +29,7 @@ export default function Home() {
 
   // Handle errors
   const handleError = () => {
-    setMessages((prevMessages) => [...prevMessages, { role: "assistant", content: "To get started, fork this Repl and add the environment variable `OPENAI_API_KEY` as a Secret. Make an account on [OpenAI](https://platform.openai.com/docs/api-reference) to get an API key." }]);
+    setMessages((prevMessages) => [...prevMessages, { role: "assistant", content: "It seems the API is down." }]);
     setLoading(false);
     setUserInput("");
   }
@@ -97,7 +97,7 @@ export default function Home() {
                 // The latest message sent by the user will be animated while waiting for a response
                 <div key={index} className={message.role === "user" && loading && index === messages.length - 1 ? styles.usermessagewaiting : message.role === "assistant" ? styles.apimessage : styles.usermessage}>
                   {/* Display the correct icon depending on the message type */}
-                  {message.role === "assistant" ? <Image src="/openai.png" alt="AI" width="30" height="30" className={styles.boticon} priority={true} /> : <Image src="/usericon.png" alt="Me" width="30" height="30" className={styles.usericon} priority={true} />}
+                  {message.role === "assistant" ? '🧠' :  '🤔'}
                   <div className={styles.markdownanswer}>
                     {/* Messages are being rendered in Markdown format */}
                     <ReactMarkdown linkTarget={"_blank"}>{message.content}</ReactMarkdown>
